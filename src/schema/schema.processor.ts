@@ -1,4 +1,4 @@
-import { Processor, Process } from '@nestjs/bull';
+import { Processor, Process, OnQueueFailed } from '@nestjs/bull';
 import { Job } from 'bull';
 import { SchemaService } from './schema.service';
 
@@ -18,7 +18,7 @@ export class SchemaConsumer {
     const body = await this.schemaService.getSchemaItems(job.data.start);
     const result = body.result;
 
-    if (result.success != 1) {
+    if (result.status != 1) {
       throw new Error(result.note);
     }
 

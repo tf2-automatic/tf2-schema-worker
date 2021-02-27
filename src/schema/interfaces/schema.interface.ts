@@ -1,6 +1,6 @@
 export interface TF2SchemaItemsResponse {
   result: {
-    success: 0 | 1;
+    status: 0 | 1;
     note?: string;
     items?: TF2SchemaItem[];
     next?: number;

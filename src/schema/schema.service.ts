@@ -29,11 +29,7 @@ export class SchemaService {
       .post<any>(url, {
         items,
       })
-      .toPromise()
-      .catch((err) => {
-        console.log(err.response.data);
-        throw err;
-      });
+      .toPromise();
   }
 
   getSchemaItems(start?: number): Promise<TF2SchemaItemsResponse> {

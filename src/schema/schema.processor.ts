@@ -36,4 +36,10 @@ export class SchemaConsumer {
       itemCount: result.items.length,
     };
   }
+
+  @OnQueueFailed()
+  onQueueFailed(job: Job, err: Error) {
+    console.log('Job with id ' + job.id + ' failed: ' + err.message);
+    console.error(err);
+  }
 }

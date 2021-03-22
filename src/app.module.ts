@@ -1,6 +1,7 @@
 import { BullModule } from '@nestjs/bull';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import IORedis from 'ioredis';
 import configuration, { QueueConfig } from './common/config/configuration';
 import { validation } from './common/config/validation';
 import { ScheamaModule } from './schema/schema.module';
@@ -19,12 +20,28 @@ import { ScheamaModule } from './schema/schema.module';
       useFactory: (configService: ConfigService) => {
         const queueConfig = configService.get<QueueConfig>('queue');
 
-        return {
-          redis: {
+        let redisConfig: IORedis.RedisOptions;
+
+        if (queueConfig.isSentinel) {
+          redisConfig = {
+            sentinels: [
+              {
+                host: queueConfig.host,
+                port: queueConfig.port,
+              },
+            ],
+            name: queueConfig.set,
+          };
+        } else {
+          redisConfig = {
             host: queueConfig.host,
             port: queueConfig.port,
             password: queueConfig.password,
-          },
+          };
+        }
+
+        return {
+          redis: redisConfig,
           prefix: 'bull',
         };
       },

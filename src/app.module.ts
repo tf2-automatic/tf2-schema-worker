@@ -4,6 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import IORedis from 'ioredis';
 import configuration, { QueueConfig } from './common/config/configuration';
 import { validation } from './common/config/validation';
+import { HealthModule } from './health/health.module';
 import { ScheamaModule } from './schema/schema.module';
 
 @Module({
@@ -46,6 +47,7 @@ import { ScheamaModule } from './schema/schema.module';
         };
       },
     }),
+    HealthModule,
     ScheamaModule,
   ],
 })

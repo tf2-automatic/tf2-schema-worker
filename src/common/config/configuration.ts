@@ -1,4 +1,5 @@
 export interface Config {
+  port: number;
   steamApiKey: string;
   queue: QueueConfig;
   services: Services;
@@ -18,6 +19,10 @@ export interface QueueConfig {
 
 export default (): Config => {
   return {
+    port:
+      process.env.NODE_ENV === 'production'
+        ? 3000
+        : parseInt(process.env.PORT, 10),
     steamApiKey: process.env.STEAM_API_KEY,
     queue: {
       isSentinel: process.env.QUEUE_IS_SENTINEL === 'true',

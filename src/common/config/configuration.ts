@@ -1,6 +1,7 @@
 export interface Config {
   port: number;
   steamApiKey: string;
+  chunkSize: number;
   queue: QueueConfig;
   services: Services;
 }
@@ -24,6 +25,7 @@ export default (): Config => {
         ? 3000
         : parseInt(process.env.PORT, 10),
     steamApiKey: process.env.STEAM_API_KEY,
+    chunkSize: parseInt(process.env.CHUNK_SIZE, 10) || 100,
     queue: {
       isSentinel: process.env.QUEUE_IS_SENTINEL === 'true',
       host: process.env.QUEUE_HOST,

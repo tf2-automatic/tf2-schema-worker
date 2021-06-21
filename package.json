@@ -34,7 +34,7 @@
     "rxjs": "^6.6.7"
   },
   "devDependencies": {
-    "@commitlint/cli": "^12.1.1",
+    "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.1",
     "@nestjs/cli": "^7.6.0",
     "@nestjs/schematics": "^7.1.3",
